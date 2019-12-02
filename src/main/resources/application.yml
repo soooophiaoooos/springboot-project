@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   mvc:
-    #当出现 404 错误时, 直接抛出异常.
+    #当出现 404 错误时, 直接抛出异常.(创建自定义异常处理必须)
     throw-exception-if-no-handler-found: true
   resources:
     #不要为我们工程中的资源文件建立映射.
