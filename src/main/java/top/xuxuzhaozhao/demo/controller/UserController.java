@@ -1,6 +1,7 @@
 package top.xuxuzhaozhao.demo.controller;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -38,5 +39,16 @@ public class UserController {
     public void testException(@RequestBody User user) {
         List<Integer> x = null;
         x.get(9);
+    }
+
+    @ApiOperation(value = "查询所有用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page",value = "当前页码"),
+            @ApiImplicitParam(name = "size",value = "每页显示条数")
+    })
+    @GetMapping("/api/selectAll")
+    public Object selectAll(@RequestParam(defaultValue = "0")Integer page,@RequestParam(defaultValue = "1")Integer size){
+        PageInfo<User> pageInfo = userService.selectAll(page,size);
+        return RetResponse.makeOKRsp(pageInfo);
     }
 }
